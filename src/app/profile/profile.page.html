@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+
+       <ion-title>الملف الشخصي </ion-title>
+
+       <ion-buttons slot="end">
+          <ion-back-button defaultHref="home"></ion-back-button>
+      </ion-buttons> 
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <section class="profile-header" [routerLink]="['/']">
+       <section class="image-circle">
+            <img src="https://static.thenounproject.com/png/783652-200.png" alt="dddd">
+       </section>
+       <p class="worker-name">أحمد محمد علي </p>
+       <small class="worker-job">سباك</small>
+       <section class="rate-requests">
+           <section class="rate">
+              <small class="small-edit" style="margin-top: 5px ; font-size: 16px">3.4</small>
+              <small class="small-edit">التقييم</small>
+           </section>
+           <section class="requests">
+              <small class="small-edit" style="margin-top: 5px ; font-size: 16px" >+30</small>
+              <small class="small-edit">الطلبات</small>
+           </section>
+       </section>
+  </section>
+
+  <ion-card >
+    <ion-card-header>
+      <ion-card-title>المعلومات الشخصية</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+        <ion-list lines="none">
+            
+            <ion-item [routerLink]="['/']">
+              <ion-icon slot="start" color="medium" name="person"></ion-icon>
+              <ion-label> أحمد محمد علي فتحي</ion-label>
+              <ion-icon slot="end" ios="ios-create" md="md-create"></ion-icon>
+            </ion-item>
+            <ion-item [routerLink]="['/']">
+                <ion-icon slot="start" color="medium" name="call"></ion-icon>
+                <ion-label>01147926944</ion-label>
+                <ion-icon slot="end" ios="ios-create" md="md-create"></ion-icon>
+            </ion-item>
+            <ion-item [routerLink]="['/']" >
+                <ion-icon slot="start" color="medium" name="home"></ion-icon>
+                <ion-label>بولاق الدكرور - المعتمدية </ion-label>
+                <ion-icon slot="end" ios="ios-create" md="md-create"></ion-icon>
+            </ion-item>
+            <ion-item [routerLink]="['/']" >
+              <ion-icon slot="start" color="medium" name="man"></ion-icon>
+              <ion-label>30 سنة </ion-label>
+              <ion-icon slot="end" ios="ios-create" md="md-create"></ion-icon>
+            </ion-item>
+            <ion-item [routerLink]="['/']" >
+              <ion-icon slot="start" color="medium" name="hammer"></ion-icon>
+              <ion-label>سباك </ion-label>
+              <ion-icon slot="end" ios="ios-create" md="md-create"></ion-icon>
+            </ion-item>
+            <ion-item   [routerLink]="['/']" >
+              <ion-icon  slot="start" color="medium" name="images"></ion-icon>
+              <ion-label>أعمالي السابقة </ion-label>
+              <ion-icon slot="end" ios="ios-arrow-dropleft-circle" md="md-arrow-dropleft-circle"></ion-icon>
+            </ion-item>
+            <ion-item style="margin: 40px 0 30px 0" color="dark" [routerLink]="['/']" >
+              <ion-icon  slot="start" color="light" name="cog"></ion-icon>
+              <ion-label>الأعدادت </ion-label>
+              <ion-icon slot="end" ios="ios-arrow-dropleft-circle" md="md-arrow-dropleft-circle"></ion-icon>
+            </ion-item>
+
+
+        </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

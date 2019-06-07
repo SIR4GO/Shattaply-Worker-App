@@ -14,7 +14,12 @@ const routes: Routes = [
   {
     path: 'list',
     loadChildren: './list/list.module#ListPageModule'
-  }
+  },
+  {
+    path: 'profile',
+    loadChildren: './profile/profile.module#ProfilePageModule'
+  },
+  { path: 'previous-work', loadChildren: './previous-work/previous-work.module#PreviousWorkPageModule' }
 ];
 
 @NgModule({
