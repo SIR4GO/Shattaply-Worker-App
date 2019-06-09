@@ -14,12 +14,19 @@ import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 export class PreviousWorkPage implements OnInit {
 
   @ViewChild(IonSlides) slides: IonSlides;
+  
+   title: string;
+   description: string;
+
+   titles: string [] = ['title1' , 'title2' , 'title3'];
+   descriptions: string[] = ['desc1' , 'desc2' , 'desc3' ];
+
 
   constructor( private photoViewer: PhotoViewer) { }
 
   slideOpts = {
     initialSlide: 1,
-    speed: 400,
+    speed: 600,
     autoplay: true,
     pagination: {
       el: '.swiper-pagination',
@@ -27,16 +34,19 @@ export class PreviousWorkPage implements OnInit {
     },
   };
 
-  ngOnInit() {
+  ngOnInit() { 
   }
   getActiveIndex(){
-      this.slides.getActiveIndex().then(value => {
-          console.log(value);
+      this.slides.getActiveIndex().then(index => {
+          this.title = this.titles[index] ;
+          this.description = this.descriptions[index];
+          console.log(this.title);
+          console.log(this.description);
       });
   }
 
-  showImage(img: HTMLElement) {
-    const imgSrc = img.getAttribute('src');
+  showImage(event) {
+    const imgSrc = event.target.getAttribute('src');
     this.photoViewer.show(imgSrc, 'hello');
   }
 }
