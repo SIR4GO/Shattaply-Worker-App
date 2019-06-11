@@ -1,0 +1,17 @@
+.choose-option{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    margin-top: 20px;
+}
+.choose-option ion-icon {
+  font-size: 40px
+}
+
+.choose-option .accept
+{
+    color: green;
+}
+.choose-option .reject{
+    color: red;
+}

@@ -19,7 +19,15 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: './profile/profile.module#ProfilePageModule'
   },
-  { path: 'previous-work', loadChildren: './previous-work/previous-work.module#PreviousWorkPageModule' }
+  { path: 'previous-work',
+    loadChildren: './previous-work/previous-work.module#PreviousWorkPageModule'
+  }
+  ,
+  { path: 'request',
+    loadChildren: './request/request.module#RequestPageModule'
+  },
+  { path: 'request-details', loadChildren: './request-details/request-details.module#RequestDetailsPageModule' },
+  { path: 'sign-up', loadChildren: './sign-up/sign-up.module#SignUpPageModule' }
 ];
 
 @NgModule({

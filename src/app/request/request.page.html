@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+
+       <ion-title>الطلبات</ion-title>
+
+       <ion-buttons slot="end">
+          <ion-back-button defaultHref="home"></ion-back-button>
+      </ion-buttons> 
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+ 
+      <ion-card *ngFor='let request of requests' (click) ="show(request)" style="height:188px" >
+          <ion-card-header style="padding-bottom: 9px">
+            <ion-card-subtitle style="color: red">{{request.state}}</ion-card-subtitle>
+            <ion-card-title class="overflow-edit"> {{request.title}}  </ion-card-title>
+            <ion-card-subtitle class="overflow-edit" style="color: darkgray ">
+               
+                  عنوان  :   {{request.address}} 
+            </ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content style="max-height: 60px; overflow: hidden;">
+           
+              {{request.description}}
+         
+          </ion-card-content>
+         
+      </ion-card>
+      
+
+</ion-content>

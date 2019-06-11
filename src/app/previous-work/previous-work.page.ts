@@ -34,14 +34,12 @@ export class PreviousWorkPage implements OnInit {
     },
   };
 
-  ngOnInit() { 
+  ngOnInit() {
   }
   getActiveIndex(){
       this.slides.getActiveIndex().then(index => {
           this.title = this.titles[index] ;
           this.description = this.descriptions[index];
-          console.log(this.title);
-          console.log(this.description);
       });
   }
 
