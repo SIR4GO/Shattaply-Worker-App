@@ -1,6 +1,7 @@
 import { Component, OnInit , ViewChild } from '@angular/core';
-import {IonSlides} from '@ionic/angular';
+import {IonSlides , AlertController , ModalController} from '@ionic/angular';
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
+import { PreviousWorkModelPage } from '../previous-work-model/previous-work-model.page';
 
 
 
@@ -14,19 +15,22 @@ import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 export class PreviousWorkPage implements OnInit {
 
   @ViewChild(IonSlides) slides: IonSlides;
-  
+
+   id;
    title: string;
    description: string;
+   image: string;
 
+   // lists
+   ids;
    titles: string [] = ['title1' , 'title2' , 'title3'];
-   descriptions: string[] = ['desc1' , 'desc2' , 'desc3' ];
+   descriptions: string[] = ['Lorem Ipsum is simply dummy inting and typesetting' , 'desc2' , 'desc3' ];
+   images: string;
 
 
-  constructor( private photoViewer: PhotoViewer) { }
-
-  slideOpts = {
+   slideOpts = {
     initialSlide: 1,
-    speed: 600,
+    speed: 300,
     autoplay: true,
     pagination: {
       el: '.swiper-pagination',
@@ -34,9 +38,13 @@ export class PreviousWorkPage implements OnInit {
     },
   };
 
+
+  constructor( private photoViewer: PhotoViewer , private alertController: AlertController , private modelController: ModalController ) { }
+
   ngOnInit() {
+
   }
-  getActiveIndex(){
+  getActiveIndex() {
       this.slides.getActiveIndex().then(index => {
           this.title = this.titles[index] ;
           this.description = this.descriptions[index];
@@ -44,7 +52,47 @@ export class PreviousWorkPage implements OnInit {
   }
 
   showImage(event) {
-    const imgSrc = event.target.getAttribute('src');
-    this.photoViewer.show(imgSrc, 'hello');
+      const imgSrc = event.target.getAttribute('src');
+      this.photoViewer.show(imgSrc, 'hello');
   }
+
+
+  async showAddModel() {
+    const modelRequest = await this.modelController.create({
+      component: PreviousWorkModelPage,
+      componentProps: {} // send data  to request-details component
+    });
+    await modelRequest.present();
+
+  }
+
+
+
+
+  async presentAlertConfirm( type = 'aa') {
+    const alert = await this.alertController.create({
+      header: 'موافق!',
+      message: 'هل تريد  <strong>مسح</strong> العمل',
+      buttons: [
+        {
+          text: 'الغاء',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah ' + type);
+          }
+        }, {
+          text: 'موافق',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+
+
 }

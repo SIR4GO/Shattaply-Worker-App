@@ -1,10 +1,9 @@
 <ion-header>
   <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-      </ion-buttons>
+       <ion-icon (click)="showAddModel()" style="font-size: 31px;margin-right: 12px;" slot="start" ios="ios-add" md="md-add"></ion-icon>
+ 
 
-       <ion-title>الأعمال السابقة</ion-title>
+       <ion-title style="text-align: center">الأعمال السابقة</ion-title>
 
        <ion-buttons slot="end">
           <ion-back-button defaultHref="home"></ion-back-button>
@@ -29,7 +28,6 @@
     </ion-slide>
   </ion-slides>
    
-  
   <ion-card class="welcome-card">
     <ion-card-header>
       <ion-card-title>{{title}}</ion-card-title>
@@ -37,8 +35,12 @@
     <ion-card-content>
       <p> {{description}}</p>
     </ion-card-content>
+    <ion-row dir="ltr" class="cardfooter">
+      <ion-col style="padding: 0">
+        <ion-icon style='font-size: 25px; padding: 7px;' (click)="presentAlertConfirm(title)" name="trash"></ion-icon>
+      </ion-col>
+    </ion-row>
   </ion-card>
-
 
 
 </ion-content>

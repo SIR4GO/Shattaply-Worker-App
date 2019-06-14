@@ -24,7 +24,7 @@
       <ion-list-header>
         <ion-label>الخيارات</ion-label>
       </ion-list-header>
-      <ion-item href="https://ionicframework.com/docs/">
+      <ion-item [routerDirection]="'root'" [routerLink]="'/sign-up'">
         <ion-icon slot="start" color="medium" name="build"></ion-icon>
         <ion-label class="font-family: 'Cairo', sans-serif;">الطلبات الواردة</ion-label>
         <ion-badge style="margin-left: 7px" slot="end" color="danger">1</ion-badge>

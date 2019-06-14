@@ -1,32 +1,75 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-icon style="margin-right: 20px; font-size: xx-large; color: white" slot="start" name="person-add"></ion-icon>
+       <ion-title>تسجيل عضوية</ion-title>
+
+  </ion-toolbar>
+</ion-header>
 
 
 <ion-content>
 
-  <ion-slides style="height: 100%" pager="true" [options]="slideOpts">
+  <ion-slides class="slides-edit" style="height: 100% " pager="true" [options]="slideOpts">
     <ion-slide>
       
-      <section style="height: 95% ; width: 100%; padding: 30px">
-           <h1>المعلومات الشخصية</h1>
+      <section style="height: 95% ; margin-top: 80px;width: 100%; padding: 30px ; overflow-y:auto">
            <ion-item>
-                <ion-label> <ion-icon name="person-add"></ion-icon></ion-label>
-                <ion-input  placeholder="الأسم كامل" ></ion-input>
+                <ion-label > <ion-icon name="contact"></ion-icon></ion-label>
+                <ion-input  required="true" type="text" placeholder="الأسم كامل" ></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label><ion-icon name="pin"></ion-icon> </ion-label>
-                <ion-input  placeholder="العنوان" ></ion-input>
+                <ion-input  required="true" type="text" placeholder="العنوان" ></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label><ion-icon name="call"></ion-icon></ion-label>
-                <ion-input placeholder="رقم الهاتف"></ion-input>
+                <ion-input  required="true" type="text" placeholder="رقم الهاتف"></ion-input>
             </ion-item>
             <ion-item>
-                <ion-label> الاسم كامل  : </ion-label>
-                <ion-input placeholder="رقم الهاتف"></ion-input>
+                <ion-label> <ion-icon name="key"></ion-icon> </ion-label>
+                <ion-input  required="true" type="password" placeholder="كلمة السر الخاصة بك "></ion-input>
             </ion-item>
-           
+            <ion-item>
+              <ion-label> <ion-icon name="calendar"> </ion-icon> </ion-label>
+              <ion-input required="true" type="text" placeholder="العمر"></ion-input>
+            </ion-item>
+            
+            <div style="position: relative ; margin-top: 50px">
+                <ion-icon (click)="nextslide()" class="next-btn" name="arrow-dropright-circle"></ion-icon>
+            </div>
+      </section>
+    </ion-slide>
+  
+
+    <ion-slide>
+      <section style="height: 95% ;width: 100%; padding: 30px ; overflow-y:auto">
+        
+          <div style="margin-top: 30px" (click)="getPersonalImage()">
+              <ion-button  expand="full"> <ion-icon slot="start" name="add"></ion-icon>الصورة الشخصية  </ion-button>
+              <img *ngIf="personalFlag" style="width: 100% ; height: 100px; display: block; margin: auto" src="{{personalIamge}}" alt="">
+          </div>
+
+        <div (click)="getPersonalCreditImage()">
+            <ion-button  expand="full"> <ion-icon slot="start" name="add"></ion-icon> صورة البطاقة الشخصية </ion-button>
+            <img *ngIf="creditFlag" style="width: 100% ; height: 100px; display: block; margin: auto" src="{{personalCreditImage}}" alt="">
+        </div>
+       
+
+        <div (click)="getCriminalImage()" >
+          <ion-button expand="full"> <ion-icon slot="start" name="add"></ion-icon> صورة الفيش والتشبيه  </ion-button>
+          <img *ngIf="criminalFlag" style="width: 100% ; height: 100px; display: block; margin: auto" src="{{criminalImage}}" alt="">  
+        </div>
+      
+        <div style="position: relative ; margin-top: 40px ; display: flex ; justify-content: space-between">
+          <ion-icon (click)="nextslide()" class="next-btn" name="arrow-dropright-circle"></ion-icon>
+          <ion-icon (click)="previouslide()" class="previous-btn" name="arrow-dropleft-circle"></ion-icon>
+        </div>  
+
       </section>
     </ion-slide>
 
+
+    
   </ion-slides>
 
 

@@ -27,7 +27,8 @@ const routes: Routes = [
     loadChildren: './request/request.module#RequestPageModule'
   },
   { path: 'request-details', loadChildren: './request-details/request-details.module#RequestDetailsPageModule' },
-  { path: 'sign-up', loadChildren: './sign-up/sign-up.module#SignUpPageModule' }
+  { path: 'sign-up', loadChildren: './sign-up/sign-up.module#SignUpPageModule' },
+  { path: 'previous-work-model', loadChildren: './previous-work-model/previous-work-model.module#PreviousWorkModelPageModule' }
 ];
 
 @NgModule({
