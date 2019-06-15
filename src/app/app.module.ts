@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -10,12 +11,12 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-// native plugine
+// native plugin
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
-
-import { RequestDetailsPageModule } from './request-details/request-details.module';
-import { PreviousWorkModelPageModule } from './previous-work-model/previous-work-model.module';
+import { RequestDetailsPageModule } from './Components/request-details/request-details.module';
+import { PreviousWorkModelPageModule } from './Components/previous-work-model/previous-work-model.module';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -26,13 +27,15 @@ import { PreviousWorkModelPageModule } from './previous-work-model/previous-work
     IonicModule.forRoot(),
     AppRoutingModule,
     RequestDetailsPageModule, // to using model with request and reauest-details
-    PreviousWorkModelPageModule  // to using model with prevoius-work and previous-work-model
+    PreviousWorkModelPageModule,  // to using model with prevoius-work and previous-work-model
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    PhotoViewer,
+    PhotoViewer, // to use native plugins
     Camera
   ],
   bootstrap: [AppComponent]

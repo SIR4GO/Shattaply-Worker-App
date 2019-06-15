@@ -1,34 +1,41 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
+// by using PreloadAllModules , you don't need import module
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+      path: '',
+      redirectTo: 'home',
+      pathMatch: 'full'
   },
   {
-    path: 'home',
-    loadChildren: './home/home.module#HomePageModule'
+      path: 'home',
+      loadChildren: './Components/home/home.module#HomePageModule'
   },
   {
-    path: 'list',
-    loadChildren: './list/list.module#ListPageModule'
+      path: 'profile',
+      loadChildren: './Components/profile/profile.module#ProfilePageModule'
   },
   {
-    path: 'profile',
-    loadChildren: './profile/profile.module#ProfilePageModule'
-  },
-  { path: 'previous-work',
-    loadChildren: './previous-work/previous-work.module#PreviousWorkPageModule'
+      path: 'previous-work',
+      loadChildren: './Components/previous-work/previous-work.module#PreviousWorkPageModule'
   }
   ,
-  { path: 'request',
-    loadChildren: './request/request.module#RequestPageModule'
+  {
+      path: 'request',
+      loadChildren: './Components/request/request.module#RequestPageModule'
   },
-  { path: 'request-details', loadChildren: './request-details/request-details.module#RequestDetailsPageModule' },
-  { path: 'sign-up', loadChildren: './sign-up/sign-up.module#SignUpPageModule' },
-  { path: 'previous-work-model', loadChildren: './previous-work-model/previous-work-model.module#PreviousWorkModelPageModule' }
+  {
+      path: 'request-details',
+      loadChildren: './Components/request-details/request-details.module#RequestDetailsPageModule'
+  },
+  {
+      path: 'sign-up',
+      loadChildren: './Components/sign-up/sign-up.module#SignUpPageModule'
+  },
+  {
+      path: 'previous-work-model',
+      loadChildren: './Components/previous-work-model/previous-work-model.module#PreviousWorkModelPageModule'
+  }
 ];
 
 @NgModule({

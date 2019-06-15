@@ -1,4 +1,4 @@
-# Shattaply-Worker-App (Graduation project)
+# Shattaply-WorkerModel-App (Graduation project)
 Ionic Application to handle worker's activities  for Shattaply
 
 # Basic Inforamtion about Shattaply app

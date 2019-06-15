@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-icon style="margin-right: 20px; font-size: xx-large; color: white" slot="start" name="person-add"></ion-icon>
+       <ion-title>تسجيل عضوية</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-slides class="slides-edit" style="height: 100% " pager="true" [options]="slideOpts">
+    <ion-slide>
+      
+      <section  style="height: 95% ;width: 100%; padding: 30px ; overflow-y:auto">
+
+           <div style="height: 63px">
+              <small *ngIf="passErrorFlag" class="message-error">* كلمة السر يجب ان تزيد عن ستة حروف</small>
+              <small *ngIf="phoneErrorFlag" class="message-error">* رقم المحمول غير صحيح </small>
+              <small *ngIf="requiredErrorFlag" class="message-error">* يجب ان تملئ جميع البيانات</small>
+           </div>
+           <ion-item style="" (click)="hideFlags()">
+                <ion-label > <ion-icon name="contact"></ion-icon></ion-label>
+                <ion-input  name="name"  [(ngModel)] = "worker.name" required="true" type="text" placeholder="الأسم كامل" ></ion-input>
+            </ion-item>
+            <ion-item (click)="hideFlags()">
+                <ion-label><ion-icon name="pin"></ion-icon> </ion-label>
+                <ion-input name="address"  [(ngModel)] = "worker.address"  required="true" type="text" placeholder="العنوان" ></ion-input>
+            </ion-item >
+            <ion-item (click)="hideFlags()">
+                <ion-label><ion-icon name="call"></ion-icon></ion-label>
+                <ion-input name="phone"  [(ngModel)] = "worker.phone"  required="true" type="text" placeholder="رقم الهاتف"></ion-input>
+            </ion-item>
+            <ion-item (click)="hideFlags()">
+                <ion-label> <ion-icon name="key"></ion-icon> </ion-label>
+                <ion-input name="password"  [(ngModel)] = "worker.password"  required="true" type="password" placeholder="كلمة السر الخاصة بك "></ion-input>
+            </ion-item>
+            <ion-item (click)="hideFlags()">
+              <ion-label> <ion-icon name="calendar"> </ion-icon> </ion-label>
+              <ion-input  name="age"  [(ngModel)] = "worker.age"  required="true" type="text" placeholder="العمر"></ion-input>
+            </ion-item>
+
+
+
+          <ion-item (click)="hideFlags()">
+              <ion-label style="color: #86888f;"><ion-icon name="build"></ion-icon> المهنة </ion-label>
+              <ion-select name="deptID"  [(ngModel)] = "worker.dept_id" cancelText="الغاء"  interface="action-sheet" placeholder="اختار مهنة">
+                  <ion-select-option value="1" >سباكة</ion-select-option>
+                  <ion-select-option value="2">نجارة</ion-select-option>
+                  <ion-select-option value="3" >نقاشة</ion-select-option>
+                  <ion-select-option value="4">كهرباء</ion-select-option>
+              </ion-select>
+          </ion-item>
+
+          <div style="position: relative ; margin-top: 50px">
+                <ion-icon (click)="nextslideAndValidateData()" class="next-btn" name="arrow-dropleft-circle"></ion-icon>
+          </div>
+
+      </section>
+    </ion-slide>
+  
+
+    <ion-slide>
+      <section style="height: 95% ;width: 100%; padding: 30px ; overflow-y:auto">
+        
+          <div style="margin-top: 30px" (click)="getPersonalImage()">
+              <ion-button  expand="full"> <ion-icon slot="start" name="add"></ion-icon>الصورة الشخصية  </ion-button>
+              <img *ngIf="personalFlag" style="width: 100% ; height: 100px; display: block; margin: auto" src="{{worker.personalImage}}" alt="">
+          </div>
+
+        <div (click)="getPersonalCreditImage()">
+            <ion-button  expand="full"> <ion-icon slot="start" name="add"></ion-icon> صورة البطاقة الشخصية </ion-button>
+            <img *ngIf="creditFlag" style="width: 100% ; height: 100px; display: block; margin: auto" src="{{worker.cardImage}}" alt="">
+        </div>
+       
+
+        <div (click)="getCriminalImage()" >
+          <ion-button expand="full"> <ion-icon slot="start" name="add"></ion-icon> صورة الفيش والتشبيه  </ion-button>
+          <img *ngIf="criminalFlag" style="width: 100% ; height: 100px; display: block; margin: auto" src="{{worker.criminalImage}}" alt="">
+        </div>
+      
+        <div style="position: relative ; margin-top: 40px ; display: flex ; justify-content: space-between">
+          <!--suppress JSIgnoredPromiseFromCall -->
+            <ion-icon (click)="submitData()" class="next-btn" name="checkmark-circle"></ion-icon>
+          <ion-icon (click)="previouslide()" class="previous-btn" name="arrow-dropright-circle"></ion-icon>
+        </div>  
+
+      </section>
+    </ion-slide>
+
+
+    
+  </ion-slides>
+
+
+</ion-content>
