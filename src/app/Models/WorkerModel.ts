@@ -13,15 +13,17 @@ export class WorkerModel {
      @IsMobilePhone("ar-EG")
      phone:string;
      @IsNotEmpty()
-     address:string;
-     @IsNotEmpty()
-     dept_id:number;
+     dep_id:number;
      work:string;
 
-
-     personalImage:string ='';
-     criminalImage:string = '';
-     cardImage:string ='';
+     @IsNotEmpty()
+     city:string;
+     @IsNotEmpty()
+     region:string;
+     status:string = "0";
+     Image:string ='55';
+     fish_tashbih :string = '44';
+     national_card:string ='44';
 
 
 }

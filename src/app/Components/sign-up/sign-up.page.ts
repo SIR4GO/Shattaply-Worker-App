@@ -3,7 +3,8 @@ import {IonSlides , AlertController} from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 //import * as $ from 'jquery';
 import {WorkerModel} from '../../Models/WorkerModel';
-import {validate} from "class-validator";
+import {validate} from 'class-validator';
+import {SignUpService} from '../../Services/sign-up.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class SignUpPage implements OnInit  {
   @ViewChild(IonSlides) slides: IonSlides;
 
   worker:WorkerModel;
-  constructor(private camera: Camera , private alertController:AlertController) {
+  constructor(private camera: Camera , private alertController:AlertController , private signUpService:SignUpService) {
      this.worker = new WorkerModel();
   }
 
@@ -28,8 +29,8 @@ export class SignUpPage implements OnInit  {
   passErrorFlag = false;
   phoneErrorFlag = false;
   requiredErrorFlag = false;
-
   isLastSlide = false;
+
   options: CameraOptions = {
     quality: 70,
     destinationType: this.camera.DestinationType.DATA_URL,
@@ -51,7 +52,7 @@ export class SignUpPage implements OnInit  {
   ngOnInit() {
   }
 
-    hideFlags(){
+  hideFlags(){
         this.passErrorFlag = false;
         this.requiredErrorFlag = false;
         this.phoneErrorFlag = false;
@@ -61,24 +62,32 @@ export class SignUpPage implements OnInit  {
       validate(this.worker).then(errors => { // errors is an array of validation errors
           if (errors.length > 0) {
               errors.forEach((error) => {
-                   if(error.property.includes("password")){
+                   if(error.property.includes('password')){
                        this.passErrorFlag = true;
                    }
-                    else if(error.property.includes("phone")){
+                    else if(error.property.includes('phone')){
                        this.phoneErrorFlag =true;
                     }
                     else{
                        this.requiredErrorFlag =true;
                     }
               });
-             console.log("validation failed. errors: ", errors);
+              console.log('validation failed. errors: ', errors);
           } else {
-              console.log("validation succeed for first slide");
+              console.log('validation succeed for first slide');
               this.slides.slideNext();
           }
       });
   }
 
+  storeWorker(){
+      console.log('here');
+      this.signUpService.addWorker(this.worker).subscribe((data) => {
+          console.log(data);
+      }, error1 => {
+          console.log(error1);
+      });
+  }
   async submitData(){
     if(this.isValidImages()){
         const alert = await this.alertController.create({
@@ -97,7 +106,9 @@ export class SignUpPage implements OnInit  {
                     handler: () => {
                         // call api
                         // redirect
-                        console.log(this.worker);
+                         console.log(this.worker);
+
+                        //console.log(this.worker);
                     }
                 }
             ]
@@ -105,15 +116,14 @@ export class SignUpPage implements OnInit  {
 
         await alert.present();
 
+    } else {
+        console.log('validation for images failed')
     }
-    else
-        console.log("validation for images failed")
   }
 
-  isValidImages():boolean{
-     return this.worker.criminalImage.length != 0 && this.worker.cardImage.length != 0 && this.worker.personalImage != 0;
+  isValidImages(): boolean{
+     return this.worker.fish_tashbih.length !== 0 && this.worker.national_card.length !== 0 && this.worker.Image.length !== 0;
   }
-
 
   previouslide(){
     this.slides.slidePrev();
@@ -122,7 +132,7 @@ export class SignUpPage implements OnInit  {
 
   getPersonalImage(){
     this.camera.getPicture(this.options).then((imageData) => {
-      this.worker.personalImage = 'data:image/jpeg;base64,' + imageData;
+      this.worker.Image = 'data:image/jpeg;base64,' + imageData;
       this.personalFlag = true;
      }, (err) => {
       // Handle error
@@ -131,7 +141,7 @@ export class SignUpPage implements OnInit  {
 
   getPersonalCreditImage(){
     this.camera.getPicture(this.options).then((imageData) => {
-      this.worker.cardImage = 'data:image/jpeg;base64,' + imageData;
+      this.worker.national_card = 'data:image/jpeg;base64,' + imageData;
       this.creditFlag = true;
      }, (err) => {
       // Handle error
@@ -140,7 +150,7 @@ export class SignUpPage implements OnInit  {
 
   getCriminalImage(){
     this.camera.getPicture(this.options).then((imageData) => {
-      this.worker.criminalImage = 'data:image/jpeg;base64,' + imageData;
+      this.worker.fish_tashbih = 'data:image/jpeg;base64,' + imageData;
       this.criminalFlag = true;
      }, (err) => {
       // Handle error
