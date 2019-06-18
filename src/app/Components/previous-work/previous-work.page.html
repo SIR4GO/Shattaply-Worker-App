@@ -14,7 +14,7 @@
 
 
 
-<ion-content>
+<ion-content *ngIf="dataReceviedFlag">
 
   <ion-slides class="slides-edit" (ionSlideDidChange) = "getActiveIndex()" pager="true" [options]="slideOpts">
     <ion-slide>

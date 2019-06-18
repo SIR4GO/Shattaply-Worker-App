@@ -1,10 +1,14 @@
-import { Component, OnInit , ViewChild } from '@angular/core';
+import { Component, OnInit , ViewChild  } from '@angular/core';
 import {IonSlides , AlertController} from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-//import * as $ from 'jquery';
+// import * as $ from 'jquery';
 import {WorkerModel} from '../../Models/WorkerModel';
 import {validate} from 'class-validator';
 import {SignUpService} from '../../Services/sign-up.service';
+import {Router} from '@angular/router';
+import { Storage } from '@ionic/storage';
+
+
 
 
 @Component({
@@ -16,8 +20,10 @@ export class SignUpPage implements OnInit  {
 
   @ViewChild(IonSlides) slides: IonSlides;
 
-  worker:WorkerModel;
-  constructor(private camera: Camera , private alertController:AlertController , private signUpService:SignUpService) {
+  worker: WorkerModel;
+  constructor(private camera: Camera , private alertController: AlertController ,
+              private signUpService: SignUpService , private router: Router, private storage: Storage)
+  {
      this.worker = new WorkerModel();
   }
 
@@ -29,7 +35,9 @@ export class SignUpPage implements OnInit  {
   passErrorFlag = false;
   phoneErrorFlag = false;
   requiredErrorFlag = false;
-  isLastSlide = false;
+  photoErrorFlag = false;
+
+
 
   options: CameraOptions = {
     quality: 70,
@@ -66,10 +74,10 @@ export class SignUpPage implements OnInit  {
                        this.passErrorFlag = true;
                    }
                     else if(error.property.includes('phone')){
-                       this.phoneErrorFlag =true;
+                       this.phoneErrorFlag = true;
                     }
                     else{
-                       this.requiredErrorFlag =true;
+                       this.requiredErrorFlag = true;
                     }
               });
               console.log('validation failed. errors: ', errors);
@@ -80,7 +88,9 @@ export class SignUpPage implements OnInit  {
       });
   }
 
-  storeWorker(){
+
+
+  storeWorker() {
       console.log('here');
       this.signUpService.addWorker(this.worker).subscribe((data) => {
           console.log(data);
@@ -88,11 +98,13 @@ export class SignUpPage implements OnInit  {
           console.log(error1);
       });
   }
-  async submitData(){
-    if(this.isValidImages()){
+
+
+  async submitData() {
+    if (this.isValidImages()) {
         const alert = await this.alertController.create({
             header: 'موافق!',
-            message: 'هل تريد تأكيد الطلب ',
+            message: '   هل تريد تأكيد الطلب للالتحاق بشطبلي ؟ ',
             buttons: [
                 {
                     text: 'الغاء',
@@ -105,10 +117,18 @@ export class SignUpPage implements OnInit  {
                     text: 'موافق',
                     handler: () => {
                         // call api
-                        // redirect
-                         console.log(this.worker);
-
-                        //console.log(this.worker);
+                        this.signUpService.addWorker(this.worker).subscribe((res) => {
+                            this.worker.work = res.data.work;
+                            this.worker.id  = res.data.id;
+                            // console.log(this.worker);
+                            // clear storage if he will sign up by new account
+                            this.storage.clear().then(() => {
+                               this.storage.set('workerInfo' , this.worker);
+                               this.router.navigate(['/home']);
+                            });
+                        }, error1 => {
+                            console.log(error1);
+                        });
                     }
                 }
             ]
@@ -117,6 +137,7 @@ export class SignUpPage implements OnInit  {
         await alert.present();
 
     } else {
+        this.photoErrorFlag = true;
         console.log('validation for images failed')
     }
   }
@@ -127,7 +148,6 @@ export class SignUpPage implements OnInit  {
 
   previouslide(){
     this.slides.slidePrev();
-    this.isLastSlide = false;
   }
 
   getPersonalImage(){

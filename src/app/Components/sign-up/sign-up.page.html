@@ -56,13 +56,13 @@
           <ion-item (click)="hideFlags()">
               <ion-label style="color: #86888f;"><ion-icon name="pin"></ion-icon> المنطقة </ion-label>
               <ion-select name="area" [(ngModel)] = "worker.region" cancelText="الغاء" interface="action-sheet" placeholder="اختار اقرب منطقة ليك">
-                  <ion-select-option value="Rehab">الرحاب</ion-select-option>
-                  <ion-select-option value="10th-of-Ramadan">10 من رمضان</ion-select-option>
-                  <ion-select-option value="Badr-City"> مدينة بدر</ion-select-option>
-                  <ion-select-option value="Nasser-City">مدينة ناصر</ion-select-option>
-                  <ion-select-option value="El-Mohandsen">المهندسين</ion-select-option>
-                  <ion-select-option value="Port-Saied-Street">شارع بورسعيد</ion-select-option>
-                  <ion-select-option value="El-Salam">السلام</ion-select-option>
+                  <ion-select-option value="الرحاب">الرحاب</ion-select-option>
+                  <ion-select-option value="العاشر من رمضان">10 من رمضان</ion-select-option>
+                  <ion-select-option value="مدينة بدر"> مدينة بدر</ion-select-option>
+                  <ion-select-option value="مدينة ناصر">مدينة ناصر</ion-select-option>
+                  <ion-select-option value="المهندسين">المهندسين</ion-select-option>
+                  <ion-select-option value="شارع بورسعيد">شارع بورسعيد</ion-select-option>
+                  <ion-select-option value="السلام">السلام</ion-select-option>
               </ion-select>
           </ion-item>
           <div style="position: relative ; margin-top: 50px">
@@ -75,7 +75,9 @@
 
     <ion-slide>
       <section style="height: 95% ;width: 100%; padding: 30px ; overflow-y:auto">
-        
+          
+          <small *ngIf="photoErrorFlag" class="message-error">* يجب رفع كل الصور</small> 
+          
           <div style="margin-top: 30px" (click)="getPersonalImage()">
               <ion-button  expand="full"> <ion-icon slot="start" name="add"></ion-icon>الصورة الشخصية  </ion-button>
               <img *ngIf="personalFlag" style="width: 100% ; height: 100px; display: block; margin: auto" src="{{worker.Image}}" alt="">
@@ -94,7 +96,7 @@
       
         <div style="position: relative ; margin-top: 40px ; display: flex ; justify-content: space-between">
           <!--suppress JSIgnoredPromiseFromCall -->
-            <ion-icon (click)="storeWorker()" class="next-btn" name="checkmark-circle"></ion-icon>
+            <ion-icon (click)="submitData()" class="next-btn" name="checkmark-circle"></ion-icon>
           <ion-icon (click)="previouslide()" class="previous-btn" name="arrow-dropright-circle"></ion-icon>
         </div>  
 

@@ -15,14 +15,12 @@ export class SignUpService {
 
         })
     };
-    url:string = "http://localhost:8000/api/storeWorker";
-    constructor(private httpClient:HttpClient) { }
+    constructor(private httpClient: HttpClient) { }
 
-    developmentUrl = "http://shataply/api/storeWorker";
-    productionUrl  = "http://192.168.1.3:80/api/storeWorker";
-    addWorker(worker:WorkerModel):Observable<any>
+    developmentUrl = 'http://shataply/api/storeWorker';
+    productionUrl  = 'http://192.168.1.3:80/api/storeWorker';
+    addWorker(worker: WorkerModel): Observable<any>
     {
-        console.log(worker);
-       return this.httpClient.post(this.developmentUrl , worker , this.httpOptions);
+        return this.httpClient.post(this.productionUrl , worker , this.httpOptions);
     }
 }

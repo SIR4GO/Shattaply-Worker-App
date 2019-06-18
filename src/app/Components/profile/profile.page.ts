@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Storage } from '@ionic/storage';
+import { WorkerModel } from 'src/app/Models/WorkerModel';
 
 @Component({
   selector: 'app-profile',
@@ -7,7 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePage implements OnInit {
 
-  constructor() { }
+  worker: WorkerModel;
+
+  constructor(private storage: Storage) {
+
+    this.worker = new WorkerModel();
+
+    this.storage.get('workerInfo').then((info) => {
+        this.worker = info;
+   });
+  }
 
   ngOnInit() {
   }

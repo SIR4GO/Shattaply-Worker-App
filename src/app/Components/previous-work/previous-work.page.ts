@@ -2,6 +2,10 @@ import { Component, OnInit , ViewChild } from '@angular/core';
 import {IonSlides , AlertController , ModalController} from '@ionic/angular';
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 import { PreviousWorkModelPage } from '../previous-work-model/previous-work-model.page';
+import { PreviousWorkResponse } from 'src/app/Models/PreviousWorkResponse';
+import { WorkerModel } from 'src/app/Models/WorkerModel';
+import { PreviousWorkService } from 'src/app/Services/previous-work.service';
+import { Storage } from '@ionic/storage';
 
 
 
@@ -17,16 +21,13 @@ export class PreviousWorkPage implements OnInit {
   @ViewChild(IonSlides) slides: IonSlides;
 
    id;
-   title: string;
-   description: string;
+   title = 'd';
+   description = 'd';
    image: string;
 
-   // lists
-   ids;
-   titles: string [] = ['title1' , 'title2' , 'title3'];
-   descriptions: string[] = ['Lorem Ipsum is simply dummy inting and typesetting' , 'desc2' , 'desc3' ];
-   images: string;
+   previousWorks: PreviousWorkResponse [] ;
 
+   dataReceviedFlag = false;
 
    slideOpts = {
     initialSlide: 1,
@@ -38,16 +39,47 @@ export class PreviousWorkPage implements OnInit {
     },
   };
 
+  worker: WorkerModel = new WorkerModel();
+  productionUrl  = 'http://192.168.1.3:80';
 
-  constructor( private photoViewer: PhotoViewer , private alertController: AlertController , private modelController: ModalController ) { }
+
+
+  constructor( private photoViewer: PhotoViewer , private alertController: AlertController ,
+               private modelController: ModalController, private storage: Storage,  private previousWorkService: PreviousWorkService )
+  {
+      // intialize
+      this.previousWorks = [];
+
+      this.storage.get('workerInfo').then((info) => {
+        this.worker = info;
+        this.getPreviousWorks(this.worker.id)
+     });
+  }
 
   ngOnInit() {
 
   }
+
+  getPreviousWorks(id: string){
+    this.previousWorkService.getPreviousWorks(id).subscribe((res) =>{ // call api
+          this.previousWorks = res.data;
+          this.editPreviousWorkImages(this.previousWorks);
+          this.dataReceviedFlag = true;
+          // console.log(res);
+          console.log(this.previousWorks);
+    });
+ }
+
+ editPreviousWorkImages(prevWorks: PreviousWorkResponse []) {
+       prevWorks.forEach((prevWork) => {
+          const photoLink =  this.productionUrl + prevWork.image; // edit photo link to be suitable with app hosting
+          prevWork.image = photoLink;
+       });
+ }
   getActiveIndex() {
       this.slides.getActiveIndex().then(index => {
-          this.title = this.titles[index] ;
-          this.description = this.descriptions[index];
+          this.title = this.previousWorks[index].title ;
+          this.description = this.previousWorks[index].description;
       });
   }
 

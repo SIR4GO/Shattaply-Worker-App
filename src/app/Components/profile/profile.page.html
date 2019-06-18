@@ -18,11 +18,11 @@
        <section class="image-circle">
             <img src="https://static.thenounproject.com/png/783652-200.png" alt="dddd">
        </section>
-       <p class="worker-name">أحمد محمد علي </p>
-       <small class="worker-job">سباك</small>
+       <p class="worker-name"> {{worker.name}}</p>
+       <small class="worker-job">{{worker.work}}</small>
        <section class="rate-requests">
            <section class="rate">
-              <small class="small-edit" style="margin-top: 5px ; font-size: 16px">3.4</small>
+              <small class="small-edit" style="margin-top: 5px ; font-size: 16px">{{worker.total_rate}}</small>
               <small class="small-edit">التقييم</small>
            </section>
            <section class="requests">
@@ -41,27 +41,27 @@
             
             <ion-item [routerLink]="['/']">
               <ion-icon slot="start" color="medium" name="person"></ion-icon>
-              <ion-label> أحمد محمد علي فتحي</ion-label>
+              <ion-label> {{worker.name}}</ion-label>
               <ion-icon slot="end" ios="ios-create" md="md-create"></ion-icon>
             </ion-item>
             <ion-item [routerLink]="['/']">
                 <ion-icon slot="start" color="medium" name="call"></ion-icon>
-                <ion-label>01147926944</ion-label>
+                <ion-label>{{worker.phone}}</ion-label>
                 <ion-icon slot="end" ios="ios-create" md="md-create"></ion-icon>
             </ion-item>
             <ion-item [routerLink]="['/']" >
                 <ion-icon slot="start" color="medium" name="pin"></ion-icon>
-                <ion-label>بولاق الدكرور - المعتمدية </ion-label>
+                <ion-label> {{worker.city}} - {{worker.region}} </ion-label>
                 <ion-icon slot="end" ios="ios-create" md="md-create"></ion-icon>
             </ion-item>
             <ion-item [routerLink]="['/']" >
               <ion-icon slot="start" color="medium" name="man"></ion-icon>
-              <ion-label>30 سنة </ion-label>
+              <ion-label>{{worker.age}} سنة </ion-label>
               <ion-icon slot="end" ios="ios-create" md="md-create"></ion-icon>
             </ion-item>
             <ion-item [routerLink]="['/']" >
               <ion-icon slot="start" color="medium" name="hammer"></ion-icon>
-              <ion-label>سباك </ion-label>
+              <ion-label> {{worker.work}} </ion-label>
               <ion-icon slot="end" ios="ios-create" md="md-create"></ion-icon>
             </ion-item>
             <ion-item   [routerLink]="['/previous-work']" >
