@@ -3,10 +3,10 @@ import {IonSlides , AlertController} from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 // import * as $ from 'jquery';
 import {WorkerModel} from '../../Models/WorkerModel';
-import {validate} from 'class-validator';
 import {SignUpService} from '../../Services/sign-up.service';
 import {Router} from '@angular/router';
 import { Storage } from '@ionic/storage';
+import {validate} from 'class-validator';
 
 
 
@@ -90,14 +90,6 @@ export class SignUpPage implements OnInit  {
 
 
 
-  storeWorker() {
-      console.log('here');
-      this.signUpService.addWorker(this.worker).subscribe((data) => {
-          console.log(data);
-      }, error1 => {
-          console.log(error1);
-      });
-  }
 
 
   async submitData() {
@@ -120,7 +112,10 @@ export class SignUpPage implements OnInit  {
                         this.signUpService.addWorker(this.worker).subscribe((res) => {
                             this.worker.work = res.data.work;
                             this.worker.id  = res.data.id;
-                            // console.log(this.worker);
+                            this.worker.image = res.data.image;
+                            this.worker.national_card = res.data.national_card;
+                            this.worker.fish_tashbih = res.data.fish_tashbih;
+                            console.log(this.worker);
                             // clear storage if he will sign up by new account
                             this.storage.clear().then(() => {
                                this.storage.set('workerInfo' , this.worker);
@@ -143,16 +138,16 @@ export class SignUpPage implements OnInit  {
   }
 
   isValidImages(): boolean{
-     return this.worker.fish_tashbih.length !== 0 && this.worker.national_card.length !== 0 && this.worker.Image.length !== 0;
+     return this.worker.fish_tashbih.length !== 0 && this.worker.national_card.length !== 0 && this.worker.image.length !== 0;
   }
 
   previouslide(){
     this.slides.slidePrev();
   }
 
-  getPersonalImage(){
+  getPersonalImage() {
     this.camera.getPicture(this.options).then((imageData) => {
-      this.worker.Image = 'data:image/jpeg;base64,' + imageData;
+      this.worker.image = 'data:image/jpeg;base64,' + imageData;
       this.personalFlag = true;
      }, (err) => {
       // Handle error

@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
       path: '',
-      redirectTo: 'home',
+      redirectTo: 'sign-in',
       pathMatch: 'full'
   },
   {
@@ -35,7 +35,8 @@ const routes: Routes = [
   {
       path: 'previous-work-model',
       loadChildren: './Components/previous-work-model/previous-work-model.module#PreviousWorkModelPageModule'
-  }
+  },
+  { path: 'sign-in', loadChildren: './sign-in/sign-in.module#SignInPageModule' }
 ];
 
 @NgModule({

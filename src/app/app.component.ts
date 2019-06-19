@@ -51,6 +51,7 @@ export class AppComponent  {
 
 
   worker: WorkerModel;
+  productionUrl = 'http://192.168.1.3:80';
 
   constructor(
     private platform: Platform,

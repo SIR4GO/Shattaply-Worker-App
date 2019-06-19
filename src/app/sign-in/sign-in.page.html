@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-icon  style="font-size: 30px; margin-right: 20px;"  slot="start" name="key"></ion-icon> 
+    <ion-title>تسجيل الدخول</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-img class="edit-logo" src='../../assets/logo.png'></ion-img> 
+  
+<section style="padding: 30px">
+    <ion-item>
+        <ion-label style="display: flex" position="floating">
+            <ion-icon style="margin:auto 0 auto 9px" name="call"></ion-icon>
+           رقم المحمول :
+        </ion-label>
+        <ion-input name="phone"  [(ngModel)] = "signInRequestModel.phone" ></ion-input>
+    </ion-item>
+    <ion-item>
+    <ion-label style="display: flex" position="floating">
+        <ion-icon style="margin:auto 0 auto 9px" name="key"></ion-icon>
+            كلمة السر :
+        </ion-label>
+     <ion-input name="password"  [(ngModel)] = "signInRequestModel.password" type="password"></ion-input>
+    </ion-item>
+
+    <ion-button (click) = "LogInWorker()" style="margin-top: 59px" expand="full">تسجيل الدخول</ion-button>
+    
+    <ion-item [routerLink]="'/sign-up'" lines="none">
+       <small style='text-decoration: underline;color: red'>   تسجيل حساب جديد ان لم تمتلك حساب ؟</small>
+    </ion-item>
+
+</section>
+
+
+</ion-content>
+

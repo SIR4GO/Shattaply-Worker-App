@@ -16,7 +16,7 @@
 <ion-content>
   <section class="profile-header" [routerLink]="['/']">
        <section class="image-circle">
-            <img src="https://static.thenounproject.com/png/783652-200.png" alt="dddd">
+            <img src="{{productionUrl + worker.image}}" alt="dddd">
        </section>
        <p class="worker-name"> {{worker.name}}</p>
        <small class="worker-job">{{worker.work}}</small>

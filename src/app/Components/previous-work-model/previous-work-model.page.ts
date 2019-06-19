@@ -46,11 +46,12 @@ export class PreviousWorkModelPage implements OnInit {
     this.modelController.dismiss();
   }
 
-  getImage(){
+  getImage() {
     this.camera.getPicture(this.options).then((imageData) => {
-      this.image = 'data:image/jpeg;base64,' + imageData
+      this.image = 'data:image/jpeg;base64,' + imageData;
       this.imageFlag = true;
       this.previousWork.image = this.image; // assign image here
+      //console.log(this.image);
      }, (err) => {
       // Handle error
      });
@@ -66,9 +67,10 @@ export class PreviousWorkModelPage implements OnInit {
       } else {
           // call api
             console.log('validation succeed for first slide');
+           // console.log(this.previousWork);
             this.previousWorkService.addPreviousWork(this.previousWork).subscribe((res) =>{
                  console.log(res);
-                 this.modelController.dismiss(this.previousWork);
+                 this.modelController.dismiss();
             }, error => {
                console.log(error);
             });
@@ -76,6 +78,6 @@ export class PreviousWorkModelPage implements OnInit {
   });
   }
 
- 
+
 
 }

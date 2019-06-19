@@ -10,6 +10,7 @@ import { WorkerModel } from 'src/app/Models/WorkerModel';
 export class ProfilePage implements OnInit {
 
   worker: WorkerModel;
+  productionUrl = 'http://192.168.1.3:80';
 
   constructor(private storage: Storage) {
 

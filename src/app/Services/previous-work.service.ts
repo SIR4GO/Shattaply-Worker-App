@@ -28,6 +28,10 @@ constructor(private httpClient: HttpClient) { }
   }
 
   getPreviousWorks(id: string): Observable<any>{
-     return this.httpClient.get(this.productionUrl+ '/api/showPreviousWork', {params: { worker_id: id }});
+     return this.httpClient.get(this.productionUrl + '/api/showPreviousWork', {params: { worker_id: id }});
+  }
+
+  deletePreviousWork(id: any): Observable<any>{
+    return this.httpClient.delete(this.productionUrl + `/api/deletePreviousWork/${id}`);
   }
 }

@@ -1,7 +1,7 @@
 import {  IsNotEmpty  } from 'class-validator';
 export class PreviousWorkModel{
     @IsNotEmpty()
-    image: string = '55';
+    image: string;
     @IsNotEmpty()
     description: string;
     @IsNotEmpty()

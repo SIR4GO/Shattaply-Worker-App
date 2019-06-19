@@ -1,4 +1,5 @@
 import { Length, IsNotEmpty , IsMobilePhone } from 'class-validator';
+
 export class WorkerModel {
 
      id: any;
@@ -23,9 +24,9 @@ export class WorkerModel {
      @IsNotEmpty()
      region: string;
      status = '0';
-     Image = '55';
-     fish_tashbih = '66';
-     national_card = '77';
+     image = '';
+     fish_tashbih = '';
+     national_card = '';
      total_rate = '0';
 
 }

@@ -17,14 +17,8 @@
 <ion-content *ngIf="dataReceviedFlag">
 
   <ion-slides class="slides-edit" (ionSlideDidChange) = "getActiveIndex()" pager="true" [options]="slideOpts">
-    <ion-slide>
-      <img class="img-edit"  (click)= "showImage($event)" src="https://static.designboom.com/wp-content/uploads/2018/09/photos-burning-man-2018-designboom-1.jpg">
-    </ion-slide>
-    <ion-slide >
-      <img  class="img-edit"   (click)= "showImage($event)" src="https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80">
-    </ion-slide>
-    <ion-slide>
-      <img  class="img-edit"   (click)= "showImage($event)" src="https://drop.ndtv.com/albums/AUTO/pininfarina-battista/640_640x480.jpg">
+    <ion-slide *ngFor="let prevWork of previousWorks">
+      <img class="img-edit"  (click)= "showImage($event)" src="{{prevWork.image}}">
     </ion-slide>
   </ion-slides>
    
@@ -37,7 +31,7 @@
     </ion-card-content>
     <ion-row dir="ltr" class="cardfooter">
       <ion-col style="padding: 0">
-        <ion-icon style='font-size: 25px; padding: 7px;' (click)="presentAlertConfirm(title)" name="trash"></ion-icon>
+        <ion-icon *ngIf="removeIconFlag" style='font-size: 25px; padding: 7px;' (click)="presentAlertConfirm(id)" name="trash"></ion-icon>
       </ion-col>
     </ion-row>
   </ion-card>
