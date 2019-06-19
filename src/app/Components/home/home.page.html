@@ -11,7 +11,7 @@
 
 <ion-content>
     <ion-card class="welcome-card">
-      <ion-img src="/assets/shapes.svg"></ion-img>
+      <ion-img src="../../../assets/shapes.svg"></ion-img>
       <ion-card-header>
         <ion-card-subtitle>أبدأ</ion-card-subtitle>
         <ion-card-title>أهلا بك في شطبلي</ion-card-title>
@@ -24,10 +24,10 @@
       <ion-list-header>
         <ion-label>الخيارات</ion-label>
       </ion-list-header>
-      <ion-item [routerDirection]="'root'" [routerLink]="'/sign-up'">
+      <ion-item [routerDirection]="'root'" [routerLink]="'/request'">
         <ion-icon slot="start" color="medium" name="build"></ion-icon>
         <ion-label class="font-family: 'Cairo', sans-serif;">الطلبات الواردة</ion-label>
-        <ion-badge style="margin-left: 7px" slot="end" color="danger">1</ion-badge>
+        <ion-badge style="margin-left: 7px" slot="end" color="danger"> {{newRequestsCount}}</ion-badge>
       </ion-item>
       <ion-item [routerDirection]="'root'" [routerLink]="'/profile'">
         <ion-icon slot="start" color="medium" name="person"></ion-icon>

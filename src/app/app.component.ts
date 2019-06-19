@@ -19,15 +19,9 @@ export class AppComponent  {
       icon: 'home'
     },
     {
-      title: ' الطلبات الواردة',
-      url: '/list',
+      title: ' الطلبات ',
+      url: '/request',
       icon: 'build'
-    }
-    ,
-    {
-      title: 'الطلبات الحالية',
-      url: '/list',
-      icon: 'briefcase'
     }
     ,
     {
@@ -66,7 +60,7 @@ export class AppComponent  {
     // get data from child component to use it in app component (parent of router-outlet)
     this.bindData.changeEmitted$.subscribe((WorkerInfo) => {
           this.worker = WorkerInfo;
-          console.log(this.worker);
+     //     console.log(this.worker);
      });
   }
 

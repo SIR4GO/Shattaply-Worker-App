@@ -23,7 +23,7 @@ productionUrl  = 'http://192.168.1.3:80/api/loginWorkers';
 
 constructor(private httpClient: HttpClient) { }
 
-signInWorker(signInReqModel: SigInRequestModel) {
+signInWorker(signInReqModel: SigInRequestModel): Observable<any> {
 
   return this.httpClient.post(this.productionUrl , signInReqModel , this.httpOptions);
 }

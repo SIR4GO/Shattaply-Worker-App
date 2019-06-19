@@ -15,14 +15,14 @@
   </ion-header>
 
 <ion-content>
-
+    
     <ion-card  >
         <ion-card-header >
           <ion-card-subtitle style="color: red">{{data.state}}</ion-card-subtitle>
-          <ion-card-title class="overflow-edit"> {{data.title}}  </ion-card-title>
-          <ion-card-subtitle class="overflow-edit" style="color: darkgray ">
-             
-                عنوان  :   {{data.address}} 
+          <ion-card-title> {{data.title}}  </ion-card-title>
+          <ion-card-subtitle  style="color: darkgray ; display: flex;" >
+                   <ion-icon style="margin: auto 0 auto 5px " name="pin"></ion-icon>
+                   {{data.location}} 
           </ion-card-subtitle>
         </ion-card-header>
         <ion-card-content >
@@ -30,9 +30,28 @@
             {{data.description}}
           
            <section class="choose-option" *ngIf="condition">
-              <ion-icon (click) ="showRejectMessage()" class="reject"  name="close-circle"></ion-icon>   
-              <ion-icon (click) = "showAcceptMessage()" class="accept"  name="checkmark-circle-outline"></ion-icon>
-           </section>         
+              <ion-icon (click) ="rejectRequest()" class="reject"  name="close-circle"></ion-icon>   
+              <ion-icon (click) = "acceptRequest()" class="accept"  name="checkmark-circle-outline"></ion-icon>
+           </section> 
+
+            <!-- user info -->
+           <ion-card style="padding: 15px ; margin-top: 30px">
+              <ion-card-header >
+                    <ion-card-subtitle style="color: red">معلومات صاحب الطلب</ion-card-subtitle>
+                    <ion-card-title > {{data.name}}  </ion-card-title>
+                    <ion-card-subtitle  style="color: darkgray ; display: flex; ">
+                            <ion-icon style="margin: auto 0 auto 5px " name="call"></ion-icon>
+                            {{data.phone_number}}
+                    </ion-card-subtitle>
+              </ion-card-header>
+              
+                <ion-card-content dir='ltr' >
+                        <ion-icon class="postive-rate" style="font-size: 25px; margin-bottom: 1.5px;" name="thumbs-up"></ion-icon>
+                        <ion-icon class="negative-rate" style="font-size: 25px; margin-left: 29px;" name="thumbs-down"></ion-icon>
+                </ion-card-content>
+
+           </ion-card>
+           <span class='date'>{{data.created_at}} </span>
         </ion-card-content>
     </ion-card>
 </ion-content>
