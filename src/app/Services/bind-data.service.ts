@@ -14,7 +14,6 @@ export class BindDataService {
    changeEmitted$ = this.emitChangeSource.asObservable();
    // Service message commands
    emitChange(change: any) {
-       
        this.emitChangeSource.next(change);
    }
 }

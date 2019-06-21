@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { BindDataService } from './Services/bind-data.service';
 import { WorkerModel } from './Models/WorkerModel';
+import { Config } from './config';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class AppComponent  {
     },
     {
       title: 'الأعدادت',
-      url: '/list',
+      url: '/settings',
       icon: 'cog'
     }
   ];
@@ -47,6 +48,8 @@ export class AppComponent  {
   worker: WorkerModel;
   productionUrl = 'http://192.168.1.3:80';
 
+  config: Config = new Config();
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -54,6 +57,8 @@ export class AppComponent  {
     private bindData: BindDataService
   ) {
 
+    this.productionUrl = this.config.hostAddress;
+    
     this.worker = new WorkerModel();
 
     this.initializeApp();

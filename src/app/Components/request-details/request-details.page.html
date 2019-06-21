@@ -35,19 +35,36 @@
            </section> 
 
             <!-- user info -->
-           <ion-card style="padding: 15px ; margin-top: 30px">
+           <ion-card  class="back-color" style="padding: 15px ; margin-top: 30px">
               <ion-card-header >
-                    <ion-card-subtitle style="color: red">معلومات صاحب الطلب</ion-card-subtitle>
-                    <ion-card-title > {{data.name}}  </ion-card-title>
-                    <ion-card-subtitle  style="color: darkgray ; display: flex; ">
-                            <ion-icon style="margin: auto 0 auto 5px " name="call"></ion-icon>
+                    <ion-card-subtitle style="display: flex; justify-content: space-between; color: beige">
+                               <section>
+                                    معلومات صاحب الطلب                                      
+                               </section>
+                               <section *ngIf="rateTypeFlag">
+                                    <ion-icon name="hammer"></ion-icon>
+                                   {{data.request_rate}}
+                               </section>
+                    </ion-card-subtitle>
+                    <ion-card-title  class="main-color"> 
+                            {{data.name}}  
+                    </ion-card-title>
+                    <ion-card-subtitle  class="main-color" style=" display: flex; ">
+                            <ion-icon  class="main-color" style="margin: auto 0 auto 5px " name="call"></ion-icon>
                             {{data.phone_number}}
                     </ion-card-subtitle>
               </ion-card-header>
               
-                <ion-card-content dir='ltr' >
-                        <ion-icon class="postive-rate" style="font-size: 25px; margin-bottom: 1.5px;" name="thumbs-up"></ion-icon>
-                        <ion-icon class="negative-rate" style="font-size: 25px; margin-left: 29px;" name="thumbs-down"></ion-icon>
+                <ion-card-content style="display: flex; justify-content: space-between;"  dir='ltr' >
+                       <section *ngIf="rateBtnsFlag" class="rate-btns">
+                            <ion-icon (click)="ratePostive()" class="postive-rate main-color" style="font-size: 25px; margin-bottom: 1.5px;" name="thumbs-up"></ion-icon>
+                            <ion-icon (click)="rateNegative()" class="negative-rate main-color" style="font-size: 25px; margin-left: 29px;" name="thumbs-down"></ion-icon>
+                       </section>
+                       <span style="color: white">   
+                           <ion-icon style="color: gold" name="star-half"></ion-icon>
+                            {{data.total_rate + ' / 10'}}
+                       </span>
+
                 </ion-card-content>
 
            </ion-card>

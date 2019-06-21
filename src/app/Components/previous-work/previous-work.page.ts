@@ -7,6 +7,7 @@ import { WorkerModel } from 'src/app/Models/WorkerModel';
 import { PreviousWorkService } from 'src/app/Services/previous-work.service';
 import { Storage } from '@ionic/storage';
 import {Router} from '@angular/router';
+import { Config } from 'src/app/config';
 
 
 
@@ -30,6 +31,8 @@ export class PreviousWorkPage implements OnInit {
 
    dataReceviedFlag = false;
 
+   config: Config = new Config();
+   
    slideOpts = {
     initialSlide: 0,
     speed: 300,
@@ -50,6 +53,8 @@ export class PreviousWorkPage implements OnInit {
                private modelController: ModalController, private storage: Storage,
                private previousWorkService: PreviousWorkService , private router: Router )
   {
+      this.productionUrl = this.config.hostAddress;
+      
       // intialize
       this.previousWorks = [];
   }

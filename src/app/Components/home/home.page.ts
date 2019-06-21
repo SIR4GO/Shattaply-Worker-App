@@ -14,8 +14,9 @@ export class HomePage {
 
 
   constructor(private bindData: BindDataService , private storage: Storage , private requestService: RequestService) {
+
         this.storage.get('workerInfo').then((worker) => {
-            // console.log(info); to check data stored sucessfully
+          // console.log(worker);  // to check data stored sucessfully
           this.bindData.emitChange(worker); // send data to parent  (app-component) to render it in split menue duo to app-component already
 
           this.requestService.countAvaliableRequests(worker.id).subscribe((res) => {

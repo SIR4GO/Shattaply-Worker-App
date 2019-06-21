@@ -4,10 +4,9 @@
     <ion-title>تسجيل الدخول</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-<ion-img class="edit-logo" src='../../assets/logo.png'></ion-img> 
-  
+
+<img class="edit-logo" src='{{image}}'>
 <section style="padding: 30px">
     <ion-item>
         <ion-label style="display: flex" position="floating">
@@ -29,6 +28,8 @@
     <ion-item [routerLink]="'/sign-up'" lines="none">
        <small style='text-decoration: underline;color: red'>   تسجيل حساب جديد ان لم تمتلك حساب ؟</small>
     </ion-item>
+
+    <p *ngIf="cardinalityErrorFlag" style="color: red">* كلمة السر او رقم المحمول خاطئ  </p>  
 
 </section>
 

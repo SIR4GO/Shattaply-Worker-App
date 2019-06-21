@@ -17,15 +17,27 @@ export class RequestDetailsPage implements OnInit {
 
   @Input () data: any;
   @Input () worker: WorkerModel;
-  condition = false;
 
+  condition = false;
+  rateBtnsFlag = false;
+  rateTypeFlag = false;
 
   ngOnInit() {
     // const data = this.nav.get('data');
-   // console.log( this.data.state.trim() === 'مؤجل');
+
+    // show rate option during load
     if ( this.data.state.trim() === 'منتظر للتأكيد' ) {
        this.condition = true;
+    } // show rate buttons if request accepted and not rated yet
+    else if ( this.data.state.trim() === 'تم الموافقة عليه' && this.data.request_rate === null){
+         this.rateBtnsFlag = true;
     }
+    else if( this.data.request_rate === 'ايجابي' || this.data.request_rate === 'سلبي') {
+        this.rateBtnsFlag = false;
+        this.rateTypeFlag = true;
+    }
+
+
   }
 
 
@@ -39,6 +51,8 @@ export class RequestDetailsPage implements OnInit {
     this.requestService.acceptRequest(this.data.id , this.worker.id ).subscribe((res) => {
 
         console.log(res);
+        this.rateBtnsFlag = true; // to show rate buttons after accepting
+
         this.model.dismiss('accept'); // send data back to request component
         this.showTostMessgae('تم الموافقة علي الطلب بنجاح')
     });
@@ -62,5 +76,41 @@ export class RequestDetailsPage implements OnInit {
         this.model.dismiss('accept'); // send data back to request component
         this.showTostMessgae('تم الرفض علي الطلب بنجاح')
     });
+  }
+
+  ratePostive() {
+    // change  data static in ui
+     this.data.total_rate += 0.1;
+     this.data.request_rate = 'ايجابي';
+     this.data.total_rate  = parseFloat(this.data.total_rate ).toFixed(1);
+     this.rateTypeFlag = true;
+     this.ngOnInit();
+
+    // change data in  backend
+     this.requestService.rateAcceptedRequest(this.data.id , 'ايجابي').subscribe((res) => {
+          console.log(res);
+     });
+     this.requestService.rateUser(this.data.user_id, 0.1).subscribe((res) =>{
+         console.log(res);
+     });
+
+  }
+
+  rateNegative() {
+    // change static data
+    this.data.total_rate -= 0.1;
+    this.data.request_rate = 'سلبي';
+    this.data.total_rate  = parseFloat(this.data.total_rate ).toFixed(1);
+    this.rateTypeFlag = true;
+    this.ngOnInit();
+
+    // change data in  backend
+    this.requestService.rateAcceptedRequest(this.data.id , 'سلبي').subscribe((res) => {
+        console.log(res);
+    });
+    this.requestService.rateUser(this.data.user_id, -0.1).subscribe((res) => {
+      console.log(res);
+    });
+
   }
 }

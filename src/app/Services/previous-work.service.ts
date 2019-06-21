@@ -3,11 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { PreviousWorkModel } from '../Models/PreviousWorkModel';
+import { Config } from '../config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PreviousWorkService {
+
+
+  config: Config = new Config();
+
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -24,14 +29,14 @@ constructor(private httpClient: HttpClient) { }
 
   addPreviousWork(previousWork: PreviousWorkModel): Observable<any>
   {
-      return this.httpClient.post(this.productionUrl + '/api/storePreviousWork' , previousWork , this.httpOptions);
+      return this.httpClient.post(this.config.hostAddress + '/api/storePreviousWork' , previousWork , this.httpOptions);
   }
 
   getPreviousWorks(id: string): Observable<any>{
-     return this.httpClient.get(this.productionUrl + '/api/showPreviousWork', {params: { worker_id: id }});
+     return this.httpClient.get(this.config.hostAddress + '/api/showPreviousWork', {params: { worker_id: id }});
   }
 
   deletePreviousWork(id: any): Observable<any>{
-    return this.httpClient.delete(this.productionUrl + `/api/deletePreviousWork/${id}`);
+    return this.httpClient.delete(this.config.hostAddress + `/api/deletePreviousWork/${id}`);
   }
 }

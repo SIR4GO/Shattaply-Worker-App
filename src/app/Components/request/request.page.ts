@@ -39,6 +39,7 @@ export class RequestPage implements OnInit {
 
                   this.emptyRequestsFlag = false;
                   this.requests = res.data;
+                  console.log(this.requests);
                   this.editRequestState(this.requests);
 
                 } else {

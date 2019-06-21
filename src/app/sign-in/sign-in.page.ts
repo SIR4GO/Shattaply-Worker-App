@@ -14,7 +14,13 @@ import { SigInRequestModel } from '../Models/SigInRequestModel';
 })
 export class SignInPage implements OnInit {
 
-  constructor(private signInWorkerService: SignInService , private router: Router, private storage: Storage) { }
+  image = '../../assets/logo.png';
+  cardinalityErrorFlag = false;
+
+  constructor(private signInWorkerService: SignInService , private router: Router, private storage: Storage) { 
+
+   
+  }
 
   worker: WorkerModel = new WorkerModel();
 
@@ -35,21 +41,25 @@ export class SignInPage implements OnInit {
           console.log('validation succeed for first slide');
           this.signInWorkerService.signInWorker(this.signInRequestModel).subscribe((res) => {
             console.log(res);
-            this.worker.id = res.data.id;
-            this.worker.name = res.data.full_name;
-            this.worker.age = res.data.age;
-            this.worker.password = res.data.password;
-            this.worker.work    = res.data.work;
-            this.worker.phone = res.data.phone;
-            this.worker.city = res.data.city;
-            this.worker.region = res.data.region;
-            this.worker.total_rate =  res.data.total_rate;
-            this.worker.image = res.data.image;
+            if (res.message !== 'not found') {
+                this.worker.id = res.data.id;
+                this.worker.name = res.data.full_name;
+                this.worker.age = res.data.age;
+                this.worker.password = res.data.password;
+                this.worker.work    = res.data.work;
+                this.worker.phone = res.data.phone;
+                this.worker.city = res.data.city;
+                this.worker.region = res.data.region;
+                this.worker.total_rate =  res.data.total_rate;
+                this.worker.image = res.data.image;
 
-            this.storage.clear().then(() => {
-              this.storage.set('workerInfo' , this.worker);
-              this.router.navigate(['/home']);
-            });
+                this.storage.clear().then(() => {
+                  this.storage.set('workerInfo' , this.worker);
+                  this.router.navigate(['/home']);
+                });
+           }
+
+            this.cardinalityErrorFlag = true;
 
           });
      }});

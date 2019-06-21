@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { WorkerModel } from 'src/app/Models/WorkerModel';
 import { BindDataService } from 'src/app/Services/bind-data.service';
+import { Config } from 'src/app/config';
 
 @Component({
   selector: 'app-profile',
@@ -10,10 +11,13 @@ import { BindDataService } from 'src/app/Services/bind-data.service';
 })
 export class ProfilePage implements OnInit {
 
+  config: Config = new Config();
   worker: WorkerModel;
   productionUrl = 'http://192.168.1.3:80';
 
   constructor(private storage: Storage ,private bindData: BindDataService) {
+
+    this.productionUrl = this.config.hostAddress;
 
     this.worker = new WorkerModel();
     this.storage.get('workerInfo').then((info) => {
